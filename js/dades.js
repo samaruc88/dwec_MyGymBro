@@ -1,0 +1,133 @@
+export const exercicis=[
+    {
+        id: "ex1",
+        nom: "Mobilitat articular de malucs",
+        categoria: "calfament",
+        descripcio: "Moviments circulars suaus per preparar les articulacions.",
+        imatge: "img/mobilitat_malucs.jpg",
+        altText: "Persona fent exercicis de mobilitat de malucs",
+        minuts: 5,
+        calories: 25,
+        grupMuscular: "Malucs"
+    },
+    {
+        id: "ex2",
+        nom: "Salts de tisora",
+        categoria: "calfament",
+        descripcio: "Salts obrint i tancant cames i braços de forma dinàmica.",
+        imatge: "img/salts_tisora.jpg",
+        altText: "Persona fent salts de tisora",
+        minuts: 5,
+        calories: 50,
+        grupMuscular: "Cos complet"
+    },
+    {
+        id: "ex3",
+        nom: "Escalfament de canells i coll",
+        categoria: "calfament",
+        descripcio: "Rotacions suaus per evitar lesions articulars abans de començar.",
+        imatge: "img/articular.jpg",
+        altText: "Detall de moviments articulars",
+        minuts: 5,
+        calories: 15,
+        grupMuscular: "Articulacions"
+    },
+    {
+        id: "ex4",
+        nom: "Planxa abdominal",
+        categoria: "core",
+        descripcio: "Mantenir la posició recta amb suport d'avantbraços i puntes dels peus.",
+        imatge: "img/planxa.jpg",
+        altText: "Persona en la posició de planxa abdominal",
+        minuts: 5,
+        calories: 40,
+        grupMuscular: "Abdominals"
+    },
+    {
+        id: "ex5",
+        nom: "Estiraments de cames",
+        categoria: "flexibilitat",
+        descripcio: "Estirament estàtic dels isquiotibials i bessons per recuperar la mobilitat.",
+        imatge: "img/estiraments.jpg",
+        altText: "Persona estirant la musculatura de les cames",
+        minuts: 7,
+        calories: 20,
+        grupMuscular: "Isquiotibials",
+    },
+    {
+        id: "ex6",
+        nom: "Estirament de triceps i muscle",
+        categoria: "flexibilitat",
+        descripcio: "Estirar el braç per darrere del cap per a relaxar la musculatura superior.",
+        imatge: "img/estirament_braços.jpg",
+        altText: "Persona estirant els braços per darrere del cap",
+        minuts: 5,
+        calories: 15,
+        grupMuscular: "Tríceps i deltoides"
+    },
+    {
+        id: "ex7",
+        nom: "Flexions de pit",
+        categoria: "tronc superior",
+        descripcio:"Baixada i pujada del cos amb els les mans recolçades a terra per treballar la zona pectoral.",
+        imatge: "img/flexions.jpg",
+        altText: "Persona fent flexions de pit a terra",
+        minuts: 8,
+        calories: 70,
+        grupMuscular: "Pectorals"
+    },
+    {
+        id: "ex8",
+        nom: "Dominades",
+        categoria: "tronc superior",
+        descripcio: "Tracció vertical per elevar el cos fins a la barra.",
+        imatge: "img/dominades.jpg",
+        altText: "Persona penjada d'una barra fent dominades",
+        minuts: 8,
+        calories: 85,
+        grupMuscular: "Dorsals"
+    },
+    {
+        id: "ex9",
+        nom: "Esquats lliures",
+        categoria: "tronc inferior",
+        descripcio: "Flexió de cames controlada mantenint l'esquena recta i el tronc ferm.",
+        imatge: "img/esquats.jpg",
+        altText: "Persona realitzant esquats al gimnàs",
+        minuts: 10,
+        calories: 90,
+        grupMuscular: "Quàdriceps"
+    },
+    {
+        id: "ex10",
+        nom: "Gambades (Lunges)",
+        categoria: "tronc inferior",
+        descripcio: "Passos llargs endavant flexionant els genolls de manera alterna.",
+        imatge: "img/lunges.jpg",
+        altText: "Persona realitzant gambades per a cames",
+        minuts: 10,
+        calories: 80,
+        grupMuscular: "Glutis"
+    },
+    {id: "ex11",
+        nom: "Carrera suau",
+        categoria: "cardio",
+        descripcio: "Trotar a ritme constant per elevar la freqüència cardíaca.",
+        imatge: "img/running.jpg",
+        altText: "Persona corrent",
+        minuts: 15,
+        calories: 150,
+        grupMuscular: "Sistema cardiovascular"
+    },
+    {
+        id: "ex12",
+        nom: "Ciclisme (Bicicleta)",
+        categoria: "cardio",
+        descripcio: "Pedalar a ritme moderat per a millorar la resistència aeròbica.",
+        imatge: "img/bicicleta.jpg",
+        altText: "Persona pedalant sobre una bicicleta",
+        minuts: 20,
+        calories: 180,
+        grupMuscular: "Quàdriceps i sistema cardiovascular"
+    }
+]
