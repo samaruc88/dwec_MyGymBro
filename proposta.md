@@ -1,7 +1,7 @@
-# Proposta de Projecte: MyGimBro
+# Proposta de Projecte: MyGymBro
 
 ## 1. Nom de l'aplicació, públic i problema que resol
-- **Nom:** MyGimBro
+- **Nom:** MyGymBro
 - **Públic:** Persones persones que volen planificar les seues sessions d'entrenament de manera ràpida i visual.
 - **Problema que resol:** Facilita la creació i organització de rutines d'entrenament personalitzades seleccionant directament els exercicis d'un catàleg interactiu, controlant al moment la durada, les categories i el compliment de regles d'entrenament.
 
