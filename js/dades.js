@@ -4,7 +4,7 @@ export const exercicis=[
         nom: "Mobilitat articular de malucs",
         categoria: "calfament",
         descripcio: "Moviments circulars suaus per preparar les articulacions.",
-        imatge: "img/mobilitat_malucs.jpg",
+        imatge: "./img/mobilitat_malucs.jpg",
         altText: "Persona fent exercicis de mobilitat de malucs",
         minuts: 5,
         calories: 25,
