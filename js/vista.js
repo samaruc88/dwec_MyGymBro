@@ -7,6 +7,7 @@ export function pintarCataleg(llista,contenidor){
     contenidor.replaceChildren();
 
     for(const exercici of llista){
+
         const article =document.createElement("article");
         article.dataset.id = exercici.id;
 
@@ -26,7 +27,19 @@ export function pintarCataleg(llista,contenidor){
         const descripcio=document.createElement("p");
         descripcio.textContent=exercici.descripcio;
 
-        article.append(titol,categoria,imatge,resum,descripcio);
+        const botoDetall=document.createElement("button");
+        botoDetall.type="button";
+        botoDetall.className = "boto-detall";
+        botoDetall.ariaLabel = `Detalls de l'exercici ${exercici.nom}`;
+        botoDetall.textContent = "Detall";
+
+        const botoAfegir=document.createElement("button");
+        botoAfegir.type="button";
+        botoAfegir.className = "boto-afegir";
+        botoAfegir.ariaLabel = `Afegir l'exercici ${exercici.nom} a la rutina`;
+        botoAfegir.textContent = "Afegir";
+
+        article.append(titol,categoria,imatge,resum,descripcio,botoDetall,botoAfegir);
         contenidor.append(article);
     }
 }
