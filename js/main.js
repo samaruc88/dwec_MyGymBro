@@ -1,6 +1,7 @@
 import {exercicis} from "./dades.js";
 import {pintarCataleg} from "./vista.js";
-import {afegirExercici} from "./rutina.js";
+import {afegirExercici, obtenirSessio} from "./rutina.js";
+import{pintarSessio} from "./vista.js";
 
 console.table(exercicis);
 console.log("Mòdul main.js carregat correctament.");
@@ -18,5 +19,8 @@ contenidorCataleg.addEventListener("click", (event) => {
 
         const missatge = afegirExercici(idExercici);
         console.log(missatge);
+
+        pintarSessio(obtenirSessio(),document.querySelector("#llista-exercicis"));
     }
 })
+pintarSessio(obtenirSessio(),document.querySelector("#llista-exercicis"));

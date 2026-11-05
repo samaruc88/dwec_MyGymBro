@@ -1,0 +1,19 @@
+.principal {
+    display: flex;
+    gap: 30px;              /* Espai de separació de 30px entre la secció i la barra lateral */
+    align-items: flex-start; /* Evita que l'aside s'estire fins a baix si el catàleg té molts exercicis */
+    padding: 20px;
+}
+.principal section {
+    flex: 3;  /* Ocupa aproximadament el 75% de l'amplada total */
+}
+
+/* La sessió d'entrenament (columna lateral) */
+.principal aside {
+    flex: 1;  /* Ocupa aproximadament el 25% restant de l'amplada total */
+    /* Estils opcionals per donar-li forma de targeta o columna diferenciada */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

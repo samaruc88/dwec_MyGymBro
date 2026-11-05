@@ -43,3 +43,27 @@ export function pintarCataleg(llista,contenidor){
         contenidor.append(article);
     }
 }
+export function pintarSessio(llista,contenidor){
+    contenidor.replaceChildren();
+    if (llista.length === 0 ){
+        const missatge=document.createElement("p");
+        missatge.textContent="Encara no has seleccionat cap exercici";
+        contenidor.append(missatge);
+        return;
+    }
+
+    llista.forEach((exercici,i)=>{
+        const nomExercici=document.createElement("li");
+        nomExercici.dataset.id = exercici.id
+        nomExercici.textContent=exercici.nom;
+        const resum=document.createElement("small");
+        resum.textContent=`${exercici.minuts} · ${exercici.calories} · ${exercici.grupMuscular}`;
+        const botoEliminar = document.createElement("button");
+        botoEliminar.type = "button";
+        botoEliminar.className = "boto-eliminar";
+        botoEliminar.textContent = "❌";
+        botoEliminar.ariaLabel = `Eliminar ${exercici.nom}`;
+
+        contenidor.append(nomExercici,botoEliminar,resum);
+    })
+}

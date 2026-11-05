@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MyGymBro</title>
     <link rel="stylesheet" href="./css/estils.css">
-    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/main.js" defer></script>
 </head>
 <body>
     <header>
@@ -22,8 +22,11 @@
                 <div id="cataleg" class="cataleg"></div>
             </section>
 
-            <aside id="sessio" aria-labelledby="titol-sessio">
+            <aside id="cistella-exercicis" aria-labelledby="titol-sessio">
                 <h2 id="titol-sessio">La meua sessio d'entrenament</h2>
+                <div id="sessio" class="sessio">
+                    <ol id="llista-exercicis"></ol>
+                </div>
             </aside>
         </div>
         <div>
