@@ -17,3 +17,16 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.principal section article {
+    /* El calc(50% - 10px) fa que ocupen la meitat de l'espai restant restat la meitat del gap */
+    flex: 1 1 calc(50% - 10px);
+    box-sizing: border-box; /* Evita que el padding desquadre la mida */
+}
+
+
+/* Si crees etiquetes <img> dins de l'article, posa-los això per a que no desquadren la mida */
+.principal section article img {
+    width: 25%;
+    height: auto;
+    display: block;
+}

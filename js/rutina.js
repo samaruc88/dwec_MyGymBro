@@ -16,3 +16,10 @@ export function afegirExercici(id){
 //Retorna els detalls complets dels exercicis que formen part de la rutina seleccionada, buscant-los pel seu ID.
 export const obtenirSessio = () =>
     cistellaExercicis.map((id) => exercicis.find((ex) => ex.id === id));
+
+
+export function eliminarExercici(id){
+    const ex = cistellaExercicis.indexOf(id);
+    if ( ex !== -1) cistellaExercicis.splice(ex, 1);
+    return "Exercici eliminat";
+}
