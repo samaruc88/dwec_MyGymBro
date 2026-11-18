@@ -30,3 +30,12 @@
     height: auto;
     display: block;
 }
+
+.formulari-inscripcio{
+    display: flex;
+    flex-direction: column;
+}
+.error-missatge{
+    color: red;
+
+}
