@@ -37,5 +37,6 @@
 }
 .error-missatge{
     color: red;
-
+    display: block;
+    font-size: small;
 }

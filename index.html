@@ -38,45 +38,45 @@
                         <label for="form-nom">Nom: </label>
                         <input type="text" id="form-nom" name="nomRutina" minlength="3" maxlength="40" required>
 
-                        <span class="error-missatge" id="error-nom"></span>
+                        <span class="error-missatge" id="error-nomRutina"></span>
 
                         <label for="form-codi">Codi curt de la rutina:</label>
                         <input type="text" id="form-codi" name="codiRutina" pattern="[a-zA-Z0-9\-]{3,12}" placeholder="Ex: RUT-NOV2026" required>
-                        <span class="error-missatge" id="error-codi"></span>
+                        <span class="error-missatge" id="error-codiRutina"></span>
 
                         <label for="form-correu">Correu: </label>
-                        <input type="email" id="form-correu" name="correuUsuari"  required>
+                        <input type="email" id="form-correu" name="correuRutina"  required>
 
-                        <span class="error-missatge" id="error-correu"></span>
+                        <span class="error-missatge" id="error-correuRutina"></span>
 
                         <label for="form-dies">Número de dies de la rutina</label>
-                        <input type="number" id="form-dies" name="fdies"  min="1" max="7" required>
+                        <input type="number" id="form-dies" name="diesRutina"  min="1" max="7" required>
 
-                        <span class="error-missatge" id="error-dies"></span>
+                        <span class="error-missatge" id="error-diesRutina"></span>
 
                         <fieldset aria-labelledby="forma-fisica">
                             <legend id="forma-fisica">Nivell de forma física: </legend>
 
-                            <input type="radio" id="nivell-principal" name="nivellUsuari" value="principiant" required>
+                            <input type="radio" id="nivell-principal" name="nivellRutina" value="principiant" required>
                             <label for="nivell-principal">Principiant</label>
 
-                            <input type="radio" id="nivell-intermedi" name="nivellUsuari" value="intermediari">
+                            <input type="radio" id="nivell-intermedi" name="nivellRutina" value="intermediari">
                             <label for="nivell-intermedi">Intermedi</label>
 
-                            <input type="radio" id="nivell-expert" name="nivellUsuari" value="expert">
+                            <input type="radio" id="nivell-expert" name="nivellRutina" value="expert">
                             <label for="nivell-expert">Expert</label>
 
-                            <span class="error-missatge" id="error-nivell"></span>
+                            <span class="error-missatge" id="error-nivellRutina"></span>
 
                         </fieldset>
                         <label for="observacions">Observacions</label>
-                        <textarea id="observacions" name="observacions" rows="2" aria-labelledby="error-observacions" required></textarea>
-                        <span class="error-missatge" id="error-observacions"></span>
+                        <textarea id="observacions" name="observacionsRutina" rows="2" aria-labelledby="error-observacions" ></textarea>
+                        <span class="error-missatge" id="error-observacionsRutina"></span>
 
                         <input type="checkbox" id="acceptar-condicions" name="acceptarCondicions" required>
                         <label for="acceptar-condicions">Confirme que sóc responsable de la meua condició física en realitzar aquesta simulació.</label>
 
-                        <span class="error-missatge" id="error-condicions"></span>
+                        <span class="error-missatge" id="error-acceptarCondicions"></span>
 
                         <p id="resum-rutina"></p>
                         <p id="errors-rutina"></p>

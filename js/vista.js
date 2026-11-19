@@ -72,3 +72,18 @@ export function pintarSessio(llista,contenidor){
         contenidor.append(liniaExercici);
     })
 }
+
+/**
+ * Mostra els missatges d'error als seus spans corresponents i actualitza
+ * l'atribut d'accessibilitat aria-invalid de cada camp del formulari.
+ * @param {HTMLFormElement} form - L'element <form> del DOM que es vol actualitzar.
+ * @param {Object.<string, string>} errors - Objecte amb els noms dels camps i els seus missatges d'error.
+ */
+export function mostrarErrors(form, errors) {
+    form.querySelectorAll("[name]").forEach((camp) => {
+        const nom = camp.name;
+        const span = document.querySelector(`#error-${nom}`);
+        if (span) span.textContent = errors[nom] ?? "";
+        camp.setAttribute("aria-invalid", String(Boolean(errors[nom])));
+    });
+}
