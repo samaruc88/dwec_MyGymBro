@@ -26,6 +26,7 @@
     - Correu de contacte fictici (obligatori i format vàlid).
     - Camp numèric (dies per setmana de la sessió: enter entre 1 i 7).
     - Selector (`select` o ràdio) de nivell de condició física (Principiant, Intermedi, Avançat).
+    - Àrea de text de 250 caràcters màxim. 
     - Casella de confirmació obligatòria amb la informació de responsabilitat propia.
     - Codi curt de la proposta (3–12 caràcters, només lletres ASCII, dígits i guió).
 - **Classes (POO):** Classe base `Sessio` i subclasse `SessioIntensiva` (que aplica un càlcul modificat o bonus addicional de calories/intensitat).
