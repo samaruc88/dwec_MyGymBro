@@ -1,8 +1,8 @@
 import {exercicis} from "./dades.js";
-import {pintarCataleg,} from "./vista.js";
+import {pintarCataleg,pintarSessio,pintarErrorsForm,pintarErrorsSessio,pintarResum} from "./vista.js";
 import {afegirExercici, eliminarExercici, obtenirSessio} from "./rutina.js";
-import{pintarSessio,mostrarErrors} from "./vista.js";
 import{validarFormulari} from "./formulari.js";
+import{validarSessio} from "./regles.js";
 
 console.table(exercicis);
 console.log("Mòdul main.js carregat correctament.");
@@ -21,6 +21,7 @@ contenidorCataleg.addEventListener("click", (event) => {
         console.log(missatge);
 
         pintarSessio(obtenirSessio(),document.querySelector("#llista-exercicis"));
+        revisar();
     }
 })
 
@@ -37,7 +38,8 @@ contenidorCistella.addEventListener("click", (event) => {
         const missatge = eliminarExercici(idExercici);
         console.log(missatge);
 
-        pintarSessio(obtenirSessio(idExercici),contenidorCistella);
+        pintarSessio(obtenirSessio(),contenidorCistella);
+        revisar();
     }
 })
 // Gestió de la validació en temps real i enviament del formulari d'inscripció
@@ -50,22 +52,37 @@ const btnConfirmar = document.querySelector("#confirmar");
  * @returns {boolean} True si el formulari no té errors, false en cas contrari.
  */
 function revisar() {
-    const errors = validarFormulari(form);
-    mostrarErrors(form, errors);
+    // 1. Validem el formulari
+    const errorsForm = validarFormulari(form);
+    pintarErrorsForm(form, errorsForm);
+    const formValid = Object.keys(errorsForm).length === 0;
 
-    const valid = Object.keys(errors).length === 0;
-    btnConfirmar.disabled = !valid;
-    return valid;
+    // 2. Validem les regles de la sessió d'exercicis
+    const resultatSessio = validarSessio(obtenirSessio());
+    pintarErrorsSessio(resultatSessio.errors);
+
+    // 3. El botó només s'habilita si TOTS DOS són vàlids
+    const totValid = formValid && resultatSessio.esValida;
+    btnConfirmar.disabled = !totValid;
+
+    // 4. Si s'ha modificat alguna dada després de confirmar, invalidem el resum anterior
+    document.querySelector("#resum-rutina").replaceChildren();
+
+    return { totValid, resultatSessio };
+
 }
 
 form.addEventListener("input", revisar);
 form.addEventListener("change", revisar);
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (revisar()) {
-        // Aquí generes el resum quan tot és vàlid
-        const resum = document.querySelector("#resum-rutina");
-        resum.textContent="CORRECTE";
+    const { totValid, resultatSessio } = revisar();
+    if (totValid) {
+        const dadesFormulari = Object.fromEntries(new FormData(form));
+        pintarResum(dadesFormulari, obtenirSessio(), document.querySelector("#resum-rutina"));
+
+
+
     }
 });
 revisar();

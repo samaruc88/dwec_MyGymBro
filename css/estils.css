@@ -5,6 +5,7 @@
     padding: 20px;
 }
 .principal section {
+
     flex: 3;  /* Ocupa aproximadament el 75% de l'amplada total */
 }
 
@@ -22,6 +23,11 @@
     flex: 1 1 calc(50% - 10px);
     box-sizing: border-box; /* Evita que el padding desquadre la mida */
 }
+.cataleg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 2 columnes exactament iguals */
+    gap: 20px;                             /* Espai entre targetes */
+}
 
 
 /* Si crees etiquetes <img> dins de l'article, posa-los això per a que no desquadren la mida */
@@ -38,5 +44,9 @@
 .error-missatge{
     color: red;
     display: block;
+    font-size: small;
+}
+.errors-sessio{
+    color: red;
     font-size: small;
 }
