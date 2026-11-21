@@ -129,3 +129,23 @@ export function pintarResum(dadesFormulari, exercicisSessio, contenidor){
 
     contenidor.append(...[titol,dadesForm,infoUsuari,ex,infoTotals,pObs,avis].filter(Boolean));
 }
+export function pintarTotalsSessio(totals) {
+    document.querySelector("#total-exercicis").textContent = totals.numExercicis;
+    document.querySelector("#total-minuts").textContent = totals.minuts;
+    document.querySelector("#total-calories").textContent = totals.calories;
+}
+
+export function pintarDetallExercici(exercici) {
+    const finestraDetall = document.getElementById("detall");
+
+    document.getElementById("detall-imatge").src = exercici.imatge;
+    document.getElementById("detall-imatge").alt = exercici.altText || exercici.nom;
+    document.getElementById("detall-titol").textContent = exercici.nom;
+    document.getElementById("detall-text").textContent = exercici.descripcio;
+    document.getElementById("detall-dades").textContent = `${exercici.categoria} · ${exercici.grupMuscular} · ${exercici.minuts} min · ${exercici.calories} kcal`;
+
+    // Guardem l'ID al botó d'afegir del modal per saber quin exercici és si l'usuari el prem
+    document.getElementById("detall-afegir").dataset.id = exercici.id;
+
+    finestraDetall.showModal();
+}

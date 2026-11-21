@@ -1,8 +1,8 @@
 import {exercicis} from "./dades.js";
-import {pintarCataleg,pintarSessio,pintarErrorsForm,pintarErrorsSessio,pintarResum} from "./vista.js";
+import {pintarCataleg,pintarSessio,pintarErrorsForm,pintarErrorsSessio,pintarResum,pintarTotalsSessio,pintarDetallExercici} from "./vista.js";
 import {afegirExercici, eliminarExercici, obtenirSessio} from "./rutina.js";
-import{validarFormulari} from "./formulari.js";
-import{validarSessio} from "./regles.js";
+import {validarFormulari} from "./formulari.js";
+import {resumSessio, validarSessio} from "./regles.js";
 
 console.table(exercicis);
 console.log("Mòdul main.js carregat correctament.");
@@ -20,12 +20,35 @@ contenidorCataleg.addEventListener("click", (event) => {
         const missatge = afegirExercici(idExercici);
         console.log(missatge);
 
-        pintarSessio(obtenirSessio(),document.querySelector("#llista-exercicis"));
-        revisar();
+        actualitzarSessio();
+    }
+    if (event.target.classList.contains("boto-detall")) {
+        const article = event.target.closest("article");
+        const idExercici = article.dataset.id;
+        const exerciciTrobat = exercicis.find((ex) => ex.id === idExercici);
+
+        if (exerciciTrobat) {
+            pintarDetallExercici(exerciciTrobat);
+        }
     }
 })
+const finestraDetall = document.getElementById("detall");
 
-pintarSessio(obtenirSessio(),document.querySelector("#llista-exercicis"));
+// 1. Tancar amb la creu
+document.getElementById("tancar-detall").addEventListener("click", () => {
+    finestraDetall.close();
+});
+
+// 2. Afegir a la rutina directament des del modal
+document.getElementById("detall-afegir").addEventListener("click", (event) => {
+    const idExercici = event.target.dataset.id;
+
+    afegirExercici(idExercici);
+    actualitzarSessio();
+
+    finestraDetall.close(); // Tanquem el modal un cop afegit
+});
+
 
 const contenidorCistella = document.querySelector("#llista-exercicis");
 console.log(contenidorCistella);
@@ -38,10 +61,15 @@ contenidorCistella.addEventListener("click", (event) => {
         const missatge = eliminarExercici(idExercici);
         console.log(missatge);
 
-        pintarSessio(obtenirSessio(),contenidorCistella);
+        actualitzarSessio();
+    }
+});
+    function actualitzarSessio() {
+        const sessioActual = obtenirSessio();
+        pintarSessio(sessioActual, document.querySelector("#llista-exercicis"));
+        pintarTotalsSessio(resumSessio(sessioActual));
         revisar();
     }
-})
 // Gestió de la validació en temps real i enviament del formulari d'inscripció
 const form = document.querySelector("#formulari-inscripcio");
 const btnConfirmar = document.querySelector("#confirmar");
@@ -68,7 +96,7 @@ function revisar() {
     // 4. Si s'ha modificat alguna dada després de confirmar, invalidem el resum anterior
     document.querySelector("#resum-rutina").replaceChildren();
 
-    return { totValid, resultatSessio };
+    return {totValid, resultatSessio};
 
 }
 
@@ -85,4 +113,4 @@ form.addEventListener("submit", (e) => {
 
     }
 });
-revisar();
+actualitzarSessio();

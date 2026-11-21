@@ -26,6 +26,12 @@
                 <h2 id="titol-sessio">La meua sessio d'entrenament</h2>
                 <div id="sessio" class="sessio">
                     <ol id="llista-exercicis"></ol>
+                    <div id="resum-aside" class="resum-aside">
+                        <p><strong id="total-exercicis">0</strong> <span>exercicis</span></p>
+                        <p><strong id="total-minuts">0</strong> <span>minuts</span></p>
+                        <p><strong id="total-calories">0</strong> <span>calories</span></p>
+
+                    </div>
                     <ul class="errors-sessio"></ul>
                 </div>
             </aside>
@@ -94,5 +100,13 @@
         </div>
     </main>
     <footer></footer>
+    <dialog id="detall" aria-labelledby="detall-titol">
+        <button id="tancar-detall" type="button" aria-label="Tancar detall" title="Tancar detall">×</button>
+        <img id="detall-imatge" alt="" />
+        <h2 id="detall-titol"></h2>
+        <p id="detall-text"></p>
+        <p id="detall-dades"></p>
+        <button id="detall-afegir" type="button">Afegir a la sessió</button>
+    </dialog>
 </body>
 </html>
