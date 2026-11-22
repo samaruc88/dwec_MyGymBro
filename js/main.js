@@ -1,6 +1,6 @@
 import {exercicis} from "./dades.js";
 import {pintarCataleg,pintarSessio,pintarErrorsForm,pintarErrorsSessio,pintarResum,pintarTotalsSessio,pintarDetallExercici} from "./vista.js";
-import {afegirExercici, eliminarExercici, obtenirSessio} from "./rutina.js";
+import {afegirExercici, eliminarExercici, obtenirSessio,moureExercici} from "./rutina.js";
 import {validarFormulari} from "./formulari.js";
 import {resumSessio, validarSessio} from "./regles.js";
 import {filtrarIOrdenarCataleg} from "./filtres.js";
@@ -71,16 +71,23 @@ document.getElementById("detall-afegir").addEventListener("click", (event) => {
 const contenidorCistella = document.querySelector("#llista-exercicis");
 console.log(contenidorCistella);
 contenidorCistella.addEventListener("click", (event) => {
-
+    const ex = event.target.closest("li");
+    const idExercici = ex.dataset.id;
     if (event.target.classList.contains("boto-eliminar")) {
 
-        const ex = event.target.closest("li");
-        const idExercici = ex.dataset.id;
+
         const missatge = eliminarExercici(idExercici);
         console.log(missatge);
 
         actualitzarSessio();
+    }else if (event.target.classList.contains("boto-pujar")) {
+        moureExercici(idExercici, - 1);
+        actualitzarSessio();
+    } else if (event.target.classList.contains("boto-baixar")) {
+        moureExercici(idExercici, + 1);
+        actualitzarSessio();
     }
+
 });
     function actualitzarSessio() {
         const sessioActual = obtenirSessio();

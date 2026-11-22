@@ -23,3 +23,12 @@ export function eliminarExercici(id){
     if ( ex !== -1) cistellaExercicis.splice(ex, 1);
     return "Exercici eliminat";
 }
+export function moureExercici(id, desplacament) {
+    const i = cistellaExercicis.indexOf(id);
+    const j = i + desplacament;
+
+    if (i < 0 || j < 0 || j >= cistellaExercicis.length) return;
+
+    cistellaExercicis.splice(i, 1);
+    cistellaExercicis.splice(j, 0, id);
+}

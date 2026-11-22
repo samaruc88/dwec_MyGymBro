@@ -62,20 +62,36 @@ export function pintarSessio(llista,contenidor){
         return;
     }
 
-    llista.forEach((exercici,i)=>{
+    llista.forEach((exercici,index)=>{
         const liniaExercici=document.createElement("li");
         liniaExercici.dataset.id = exercici.id
         const nomExercici= document.createElement("span");
         nomExercici.textContent=exercici.nom;
         const resum=document.createElement("small");
         resum.textContent=`${exercici.minuts} · ${exercici.calories} · ${exercici.grupMuscular}`;
+
+        const botoBaixar = document.createElement("button");
+        botoBaixar.type = "button";
+        botoBaixar.className = "boto-baixar";
+        botoBaixar.textContent = "↓";
+        botoBaixar.ariaLabel = `Baixar ${exercici.nom}`;
+        botoBaixar.disabled = index === llista.length - 1;
+
+        // Botó Pujar
+        const botoPujar = document.createElement("button");
+        botoPujar.type = "button";
+        botoPujar.className = "boto-pujar";
+        botoPujar.textContent = "↑";
+        botoPujar.ariaLabel = `Pujar ${exercici.nom}`;
+        botoPujar.disabled = index === 0; // No es pot pujar si ja és el primer
+
         const botoEliminar = document.createElement("button");
         botoEliminar.type = "button";
         botoEliminar.className = "boto-eliminar";
         botoEliminar.textContent = "❌";
         botoEliminar.ariaLabel = `Eliminar ${exercici.nom}`;
 
-        liniaExercici.append(nomExercici,botoEliminar,resum);
+        liniaExercici.append(nomExercici,botoBaixar,botoPujar,botoEliminar,resum);
 
         contenidor.append(liniaExercici);
     })
