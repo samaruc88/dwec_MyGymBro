@@ -3,14 +3,32 @@ import {pintarCataleg,pintarSessio,pintarErrorsForm,pintarErrorsSessio,pintarRes
 import {afegirExercici, eliminarExercici, obtenirSessio} from "./rutina.js";
 import {validarFormulari} from "./formulari.js";
 import {resumSessio, validarSessio} from "./regles.js";
+import {filtrarIOrdenarCataleg} from "./filtres.js";
 
 console.table(exercicis);
 console.log("Mòdul main.js carregat correctament.");
 console.log("Exercicis carregats:", exercicis);
 
-pintarCataleg(exercicis,document.querySelector("#cataleg"));
+
+
 
 const contenidorCataleg = document.querySelector("#cataleg");
+const inputCerca = document.querySelector("#cerca-text");
+const selectCategoria = document.querySelector("#filtre-categoria");
+const selectOrdre = document.querySelector("#ordenar-cataleg");
+
+function actualitzarCataleg() {
+    const exercicisFiltrats = filtrarIOrdenarCataleg(exercicis, {
+        text: inputCerca.value,
+        categoria: selectCategoria.value,
+        ordre: selectOrdre.value
+    });
+    pintarCataleg(exercicisFiltrats, contenidorCataleg);
+}
+
+inputCerca.addEventListener("input", actualitzarCataleg);
+selectCategoria.addEventListener("change", actualitzarCataleg);
+selectOrdre.addEventListener("change", actualitzarCataleg);
 contenidorCataleg.addEventListener("click", (event) => {
     if (event.target.classList.contains("boto-afegir")) {
 
@@ -113,4 +131,5 @@ form.addEventListener("submit", (e) => {
 
     }
 });
+actualitzarCataleg();
 actualitzarSessio();

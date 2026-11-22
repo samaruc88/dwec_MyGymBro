@@ -7,6 +7,13 @@ import { resumSessio } from "./regles.js";
 export function pintarCataleg(llista,contenidor){
     contenidor.replaceChildren();
 
+    if (llista.length === 0) {
+        const missatge = document.createElement("p");
+        missatge.textContent = "No hi ha exercicis amb estos filtres.";
+        contenidor.append(missatge);
+        return;
+    }
+
     for(const exercici of llista){
 
         const article =document.createElement("article");
@@ -25,8 +32,8 @@ export function pintarCataleg(llista,contenidor){
         const resum=document.createElement("p");
         resum.textContent= `${exercici.minuts} minuts - ${exercici.calories} calories - ${exercici.grupMuscular}`;
 
-        const descripcio=document.createElement("p");
-        descripcio.textContent=exercici.descripcio;
+        //const descripcio=document.createElement("p");
+        //descripcio.textContent=exercici.descripcio;
 
         const botoDetall=document.createElement("button");
         botoDetall.type="button";
@@ -40,7 +47,7 @@ export function pintarCataleg(llista,contenidor){
         botoAfegir.ariaLabel = `Afegir l'exercici ${exercici.nom} a la rutina`;
         botoAfegir.textContent = "Afegir";
 
-        article.append(titol,categoria,imatge,resum,descripcio,botoDetall,botoAfegir);
+        article.append(titol,categoria,imatge,resum,botoDetall,botoAfegir);
         contenidor.append(article);
     }
 }

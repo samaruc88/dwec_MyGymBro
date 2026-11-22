@@ -18,6 +18,29 @@
         <div class="principal">
             <section aria-labelledby="titol-cateleg">
                 <h2 id="titol-cataleg">Tria el teus exericis</h2>
+                <div class="filtres-cataleg" role="search">
+                    <label for="cerca-text">Cercar exercici:</label>
+                    <input type="search" id="cerca-text">
+
+                    <label for="filtre-categoria">Categoria:</label>
+                    <select id="filtre-categoria">
+                        <option value="tots">Tots</option>
+                        <option value="calfament">Calfament</option>
+                        <option value="flexibilitat">Flexibilitat</option>
+                        <option value="tronc inferior">Tronc Inf.</option>
+                        <option value="tronc superior">Tronc Sup.</option>
+                        <option value="core">Core</option>
+                        <option value="cardio">Cardio</option>
+
+                    </select>
+
+                    <label for="ordenar-cataleg">Ordenar per:</label>
+                    <select id="ordenar-cataleg">
+                        <option value="nom">Nom</option>
+                        <option value="minuts">Durada</option>
+                        <option value="calories">Calories</option>
+                    </select>
+                </div>
                 <!-- Pose un div sinos al carregar el cataleg es borarria tot el de dalt -->
                 <div id="cataleg" class="cataleg"></div>
             </section>
