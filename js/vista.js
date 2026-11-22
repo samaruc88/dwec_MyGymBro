@@ -65,6 +65,8 @@ export function pintarSessio(llista,contenidor){
     llista.forEach((exercici,index)=>{
         const liniaExercici=document.createElement("li");
         liniaExercici.dataset.id = exercici.id
+        liniaExercici.draggable = true;
+
         const nomExercici= document.createElement("span");
         nomExercici.textContent=exercici.nom;
         const resum=document.createElement("small");

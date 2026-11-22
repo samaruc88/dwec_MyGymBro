@@ -1,6 +1,6 @@
 import {exercicis} from "./dades.js";
 import {pintarCataleg,pintarSessio,pintarErrorsForm,pintarErrorsSessio,pintarResum,pintarTotalsSessio,pintarDetallExercici} from "./vista.js";
-import {afegirExercici, eliminarExercici, obtenirSessio,moureExercici} from "./rutina.js";
+import {afegirExercici, eliminarExercici, obtenirSessio,moureExercici,reordenarExercici} from "./rutina.js";
 import {validarFormulari} from "./formulari.js";
 import {resumSessio, validarSessio} from "./regles.js";
 import {filtrarIOrdenarCataleg} from "./filtres.js";
@@ -87,8 +87,36 @@ contenidorCistella.addEventListener("click", (event) => {
         moureExercici(idExercici, + 1);
         actualitzarSessio();
     }
-
 });
+contenidorCistella.addEventListener("dragstart", (event) => {
+    const li = event.target.closest("li");
+    if (!li) return;
+    event.dataTransfer.setData("text/plain", li.dataset.id);
+    li.classList.add("arrossegant");
+});
+
+contenidorCistella.addEventListener("dragover", (event) => {
+    event.preventDefault();
+});
+
+contenidorCistella.addEventListener("drop", (event) => {
+    event.preventDefault();
+    const liDesti = event.target.closest("li");
+    if (!liDesti) return;
+
+    const idOrigen = event.dataTransfer.getData("text/plain");
+    const idDesti = liDesti.dataset.id;
+    console.log("DROPPED:", idOrigen, "->", idDesti);
+    reordenarExercici(idOrigen, idDesti);
+    actualitzarSessio();
+});
+
+contenidorCistella.addEventListener("dragend", (event) => {
+    const li = event.target.closest("li");
+    if (li) li.classList.remove("arrossegant");
+});
+
+
     function actualitzarSessio() {
         const sessioActual = obtenirSessio();
         pintarSessio(sessioActual, document.querySelector("#llista-exercicis"));
