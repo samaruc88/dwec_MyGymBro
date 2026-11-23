@@ -1,12 +1,14 @@
 import { resumSessio } from "./regles.js";
+
 /**
- * Pinta el catàleg d'exercicis al DOM de manera dinàmica.
- * @param {Array} llista - L'array d'objectes amb els exercicis a mostrar.
+ * Pinta les targetes d'exercicis dins del catàleg.
+ * @param {Array} llista - Exercicis a mostrar.
  * @param {HTMLElement} contenidor - L'element del DOM on s'injectaran les targetes.
  */
 export function pintarCataleg(llista,contenidor){
     contenidor.replaceChildren();
 
+    //COntrol d'estat buit quan el cercador o els fills no troben resultats
     if (llista.length === 0) {
         const missatge = document.createElement("p");
         missatge.textContent = "No hi ha exercicis amb estos filtres.";
@@ -19,10 +21,11 @@ export function pintarCataleg(llista,contenidor){
         const article =document.createElement("article");
         article.dataset.id = exercici.id;
 
-        const titol=document.createElement("h2");
+        const titol=document.createElement("h3");
         titol.textContent=exercici.nom;
 
-        const categoria=document.createElement("h3");
+        const categoria=document.createElement("p");
+        categoria.classList.add("etiqueta-categoria");
         categoria.textContent=exercici.categoria;
 
         const imatge = document.createElement("img");
@@ -30,10 +33,8 @@ export function pintarCataleg(llista,contenidor){
         imatge.alt=exercici.altText;
 
         const resum=document.createElement("p");
-        resum.textContent= `${exercici.minuts} minuts - ${exercici.calories} calories - ${exercici.grupMuscular}`;
+        resum.textContent= `${exercici.minuts} minuts - ${exercici.calories} kcal - ${exercici.grupMuscular}`;
 
-        //const descripcio=document.createElement("p");
-        //descripcio.textContent=exercici.descripcio;
 
         const botoDetall=document.createElement("button");
         botoDetall.type="button";
@@ -51,6 +52,12 @@ export function pintarCataleg(llista,contenidor){
         contenidor.append(article);
     }
 }
+/**
+ * Renderitza la llista ordenada dels exercicis seleccionats a l'aside,
+ * incloent els controls per reordenar (botons i arrossegament) i eliminar.
+ * @param {Array<Object>} llista - Exercicis actuals de la sessió.
+ * @param {HTMLElement} contenidor - Element <ol> de la llista.
+ */
 export function pintarSessio(llista,contenidor){
     contenidor.replaceChildren();
     if (llista.length === 0 ){
@@ -65,10 +72,11 @@ export function pintarSessio(llista,contenidor){
     llista.forEach((exercici,index)=>{
         const liniaExercici=document.createElement("li");
         liniaExercici.dataset.id = exercici.id
-        liniaExercici.draggable = true;
+        liniaExercici.draggable = true; // Per al Drag & Drop
 
         const nomExercici= document.createElement("span");
         nomExercici.textContent=exercici.nom;
+
         const resum=document.createElement("small");
         resum.textContent=`${exercici.minuts} · ${exercici.calories} · ${exercici.grupMuscular}`;
 
@@ -98,6 +106,10 @@ export function pintarSessio(llista,contenidor){
         contenidor.append(liniaExercici);
     })
 }
+/**
+ * Mostra els avisos d'incompliment de les regles de la sessió als seus contenidors.
+ * @param {Array<string>} errors - Llista de missatges d'error de les regles.
+ */
 export function pintarErrorsSessio(errors){
     const contenidorsErrorSessio= document.querySelectorAll(".errors-sessio");
 
@@ -129,37 +141,56 @@ export function pintarErrorsForm(form, errors) {
         camp.setAttribute("aria-invalid", String(Boolean(errors[nom])));
     });
 }
-
+/**
+ * Genera i pinta el resum final quan el formulari i les regles de la sessió són vàlids.
+ * @param {Object} dadesFormulari - Dades recollides del formulari.
+ * @param {Array<Object>} exercicisSessio - Llista d'exercicis confirmats.
+ * @param {HTMLElement} contenidor - Element on s'injectarà el resum.
+ */
 export function pintarResum(dadesFormulari, exercicisSessio, contenidor){
     contenidor.replaceChildren();
     const totals = resumSessio(exercicisSessio);
+
     const titol=document.createElement("h3");
     titol.textContent="INSCRIPCIÓ RUTINA CONFIRMADA";
+
     const dadesForm=document.createElement("p");
     dadesForm.textContent=`${dadesFormulari.nomRutina} - ${dadesFormulari.codiRutina}`;
+
     const infoUsuari = document.createElement("p");
     infoUsuari.textContent = `Correu: ${dadesFormulari.correuRutina} · Dies a la setmana: ${dadesFormulari.diesRutina} · Nivell: ${dadesFormulari.nivellRutina}`;
+
     const ex = document.createElement("p");
     ex.textContent = "Exercicis: " + exercicisSessio.map((exercici) => exercici.nom).join(", ");
+
     const infoTotals = document.createElement("p");
-    infoTotals.textContent = `Total: ${totals.numExercicis} exercicis · ${totals.minuts} minuts · ${totals.calories} calories`;
+    infoTotals.textContent = `Total: ${totals.numExercicis} exercicis · ${totals.minuts} minuts · ${totals.calories} kcal`;
 
     let pObs = null;
     if (dadesFormulari.observacionsRutina) {
         pObs = document.createElement("p");
         pObs.textContent = `Observacions: ${dadesFormulari.observacionsRutina}`;
     }
+
     const avis = document.createElement("p");
     avis.textContent = "No s’ha enviat cap dada. Aquesta planificació és una simulació d'entrenament.";
 
     contenidor.append(...[titol,dadesForm,infoUsuari,ex,infoTotals,pObs,avis].filter(Boolean));
 }
+/**
+ * Actualitza els comptadors numèrics de l'aside en temps real.
+ * @param {{numExercicis: number, minuts: number, calories: number}} totals - Objecte amb els sumatoris.
+ */
 export function pintarTotalsSessio(totals) {
     document.querySelector("#total-exercicis").textContent = totals.numExercicis;
     document.querySelector("#total-minuts").textContent = totals.minuts;
     document.querySelector("#total-calories").textContent = totals.calories;
 }
 
+/**
+ * Ompli el modal <dialog> amb la informació completa d'un exercici i l'obri.
+ * @param {Object} exercici - Objecte amb totes les dades de l'exercici seleccionat.
+ */
 export function pintarDetallExercici(exercici) {
     const finestraDetall = document.getElementById("detall");
 

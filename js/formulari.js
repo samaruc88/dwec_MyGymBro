@@ -8,7 +8,7 @@ export function validarFormulari(form) {
     const dadesFormulari = new FormData(form);
     const errors = {};
 
-    // 1. Extraiem i netegem els valors fent servir els 'name' del teu HTML
+
     const nom = String(dadesFormulari.get("nomRutina") ?? "").trim();
     const codi = String(dadesFormulari.get("codiRutina") ?? "").trim();
     const correu = String(dadesFormulari.get("correuRutina") ?? "").trim();
@@ -16,7 +16,7 @@ export function validarFormulari(form) {
     const nivell = dadesFormulari.get("nivellRutina");
     const observacions = String(dadesFormulari.get("observacionsRutina") ??"").trim();
 
-    // 2. Comprovem les regles una per una
+
     if (nom.length < 3 || nom.length > 40) errors.nomRutina = "Escriu un nom entre 3 i 40 caràcters.";
     if (!/^[a-zA-Z0-9\-]{3,12}$/.test(codi)) errors.codiRutina = "El codi ha de tindre entre 3 i 12 caràcters.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correu)) errors.correuRutina = "El correu electrònic és incorrecte.";
@@ -25,6 +25,6 @@ export function validarFormulari(form) {
     if (observacions.length>250) errors.observacionsRutina = "El màxim és 250 caràcters.";
     if (!dadesFormulari.has("acceptarCondicions")) errors.acceptarCondicions = "Cal acceptar les condicions de responsabilitat.";
 
-    // 3. Retornem l'objecte dadesFormulari'errors (si està buit, tot és correcte)
+
     return errors;
 }

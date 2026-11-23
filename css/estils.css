@@ -1,60 +1,210 @@
-.principal {
-    display: flex;
-    gap: 30px;              /* Espai de separació de 30px entre la secció i la barra lateral */
-    align-items: flex-start; /* Evita que l'aside s'estire fins a baix si el catàleg té molts exercicis */
-    padding: 20px;
-}
-.principal section {
-
-    flex: 3;  /* Ocupa aproximadament el 75% de l'amplada total */
+/* 1. CONFIGURACIÓ BÀSICA I MODE FOSC */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* La sessió d'entrenament (columna lateral) */
-.principal aside {
-    flex: 1;  /* Ocupa aproximadament el 25% restant de l'amplada total */
-    /* Estils opcionals per donar-li forma de targeta o columna diferenciada */
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.principal section article {
-    /* El calc(50% - 10px) fa que ocupen la meitat de l'espai restant restat la meitat del gap */
-    flex: 1 1 calc(50% - 10px);
-    box-sizing: border-box; /* Evita que el padding desquadre la mida */
-}
-.cataleg {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 2 columnes exactament iguals */
-    gap: 20px;                             /* Espai entre targetes */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #222222;
+    padding: 15px;
 }
 
-
-/* Si crees etiquetes <img> dins de l'article, posa-los això per a que no desquadren la mida */
-.principal section article img {
-    width: 25%;
-    height: auto;
-    display: block;
-}
-
-.formulari-inscripcio{
-    display: flex;
-    flex-direction: column;
-}
-.error-missatge{
-    color: red;
-    display: block;
-    font-size: small;
-}
-.errors-sessio{
-    color: red;
-    font-size: small;
-}
+/* Colors quan s'activa el mode fosc amb la cookie */
 body.tema-fosc {
     background-color: #1a1a1a;
-    color: #f4f4f4;
+    color: #f0f0f0;
 }
-aside.tema-fosc {
+
+body.tema-fosc header,
+body.tema-fosc section,
+body.tema-fosc aside,
+body.tema-fosc footer,
+body.tema-fosc dialog {
+    background-color: #2b2b2b;
+    color: #f0f0f0;
+    border-color: #444444;
+}
+
+/* 2. CAPÇALERA I PEU DE PÀGINA */
+header, footer {
+    max-width: 1100px;
+    margin: 0 auto 20px auto;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* 3. ESTRUCTURA DE LA PÀGINA (MÒBIL I ESCRIPTORI) */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* En mòbil es veu una cosa davall de l'altra */
+.principal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* En pantalla gran (escriptori) van el catàleg i l'aside de costat */
+@media (min-width: 800px) {
+    .principal {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .principal section {
+        flex: 3;
+    }
+    .principal aside {
+        flex: 1;
+    }
+}
+
+section, aside {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 5px;
+}
+
+/* 4. FILTRES I CATÀLEG */
+.filtres-cataleg {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.cataleg {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.cataleg article {
+    border: 1px solid #cccccc;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.cataleg img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    margin: 8px 0;
+}
+
+/* 5. SESSIÓ SELECCIONADA (ASIDE) */
+#llista-exercicis {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+#llista-exercicis li {
+    margin-bottom: 8px;
+    padding: 6px;
+    border: 1px solid #dddddd;
+    cursor: grab;
+}
+
+#llista-exercicis li.arrossegant {
+    opacity: 0.4;
+}
+
+.resum-aside {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    margin-bottom: 10px;
+}
+
+/* 6. BOTONS, FORMULARI I ERRORS */
+button {
+    background-color: #0056b3;
     color: white;
-    background-color: #1a1a1a;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+button:disabled {
+    background-color: #999999;
+    cursor: not-allowed;
+}
+
+/* Contorn visible per al teclat (Accessibilitat) */
+:focus-visible {
+    outline: 3px solid orange;
+}
+
+.camps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 500px;
+}
+
+input, select, textarea {
+    padding: 6px;
+    border: 1px solid #999999;
+    border-radius: 4px;
+}
+
+.error-missatge,
+.errors-sessio {
+    color: red;
+    font-size: 14px;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+    border: 2px solid ;
+}
+
+#resum-rutina {
+    margin-top: 15px;
+    padding: 10px;
+    border: 2px solid #0056b3;
+}
+
+/* 7. FINESTRA MODAL (<dialog>) */
+dialog {
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    max-width: 400px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+dialog img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin: 10px 0;
 }

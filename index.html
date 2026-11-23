@@ -20,8 +20,9 @@
     </header>
     <main id="aplicacio">
         <div class="principal">
-            <section aria-labelledby="titol-cateleg">
-                <h2 id="titol-cataleg">Tria el teus exericis</h2>
+            <!-- Zona esquerra: Catàleg d'exercicis i filtres -->
+            <section aria-labelledby="titol-cataleg">
+                <h2 id="titol-cataleg">Tria els teus exericis</h2>
                 <div class="filtres-cataleg" role="search">
                     <label for="cerca-text">Cercar exercici:</label>
                     <input type="search" id="cerca-text">
@@ -45,14 +46,16 @@
                         <option value="calories">Calories</option>
                     </select>
                 </div>
-                <!-- Pose un div sinos al carregar el cataleg es borarria tot el de dalt -->
+                <!-- Pose un div sinos al carregar el cataleg es borraria tot el de dalt -->
                 <div id="cataleg" class="cataleg"></div>
             </section>
-
+            <!-- Zona dreta: Sessió seleccionada i càlculs en temps real -->
             <aside id="cistella-exercicis" aria-labelledby="titol-sessio">
-                <h2 id="titol-sessio">La meua sessio d'entrenament</h2>
+                <h2 id="titol-sessio">La meua sessió d'entrenament</h2>
+
                 <div id="sessio" class="sessio">
                     <ol id="llista-exercicis"></ol>
+
                     <div id="resum-aside" class="resum-aside">
                         <p><strong id="total-exercicis">0</strong> <span>exercicis</span></p>
                         <p><strong id="total-minuts">0</strong> <span>minuts</span></p>
@@ -64,9 +67,11 @@
                 </div>
             </aside>
         </div>
+        <!-- Zona inferior: Formulari de confirmació i resum final -->
         <div class="inferior">
             <section aria-labelledby="titol-inscripcio">
                 <h2 id="titol-inscripcio">Inscripció a la rutina</h2>
+
                 <form id="formulari-inscripcio" novalidate>
                     <div class="camps">
 
@@ -104,6 +109,7 @@
                             <span class="error-missatge" id="error-nivellRutina"></span>
 
                         </fieldset>
+
                         <label for="observacions">Observacions</label>
                         <textarea id="observacions" name="observacionsRutina" rows="2" aria-labelledby="error-observacions" ></textarea>
                         <span class="error-missatge" id="error-observacionsRutina"></span>
@@ -113,7 +119,6 @@
 
                         <span class="error-missatge" id="error-acceptarCondicions"></span>
 
-                        <p id="resum-rutina"></p>
                         <p class="errors-sessio"></p>
 
                         <button type="submit" id="confirmar">Confirmar rutina i generar resum</button>
@@ -122,12 +127,16 @@
                     </div>
                 </form>
                 <!-- role:status per marcar regió que mostra un missatge -->
-                <div id="resum" role="status"></div>
+                <div id="resum-rutina" role="status"></div>
 
             </section>
         </div>
     </main>
-    <footer></footer>
+
+    <footer>
+        <p>Projecte de Desenvolupament Web en Entorn Client (DWEC) - MyGymBro</p>
+    </footer>
+
     <dialog id="detall" aria-labelledby="detall-titol">
         <button id="tancar-detall" type="button" aria-label="Tancar detall" title="Tancar detall">×</button>
         <img id="detall-imatge" alt="" />
