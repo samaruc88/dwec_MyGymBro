@@ -50,3 +50,7 @@
     color: red;
     font-size: small;
 }
+body.tema-fosc {
+    background-color: #1a1a1a;
+    color: #f4f4f4;
+}

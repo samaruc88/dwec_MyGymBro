@@ -4,6 +4,7 @@ import {afegirExercici, eliminarExercici, obtenirSessio,moureExercici,reordenarE
 import {validarFormulari} from "./formulari.js";
 import {resumSessio, validarSessio} from "./regles.js";
 import {filtrarIOrdenarCataleg} from "./filtres.js";
+import {guardarCookie,llegirCookie,eliminarCookie} from "./persistencia.js";
 
 console.table(exercicis);
 console.log("Mòdul main.js carregat correctament.");
@@ -162,6 +163,28 @@ function revisar() {
     return {totValid, resultatSessio};
 
 }
+const botoTema = document.getElementById("boto-tema");
+const botoRestablirTema = document.getElementById("restablir-tema");
+if (llegirCookie() === "fosc") {
+    document.body.classList.add("tema-fosc");
+    botoTema.textContent = "Canviar a mode clar";
+}
+botoTema.addEventListener("click", () => {
+    const esFosc = document.body.classList.toggle("tema-fosc");
+
+    if (esFosc) {
+        guardarCookie("fosc");
+        botoTema.textContent = "mode clar";
+    } else {
+        guardarCookie("clar");
+        botoTema.textContent = "mode fosc";
+    }
+});
+botoRestablirTema.addEventListener("click", () => {
+    document.body.classList.remove("tema-fosc");
+    eliminarCookie();
+    botoTema.textContent = "mode fosc";
+});
 
 form.addEventListener("input", revisar);
 form.addEventListener("change", revisar);
