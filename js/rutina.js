@@ -1,5 +1,9 @@
 import {exercicis} from "./dades.js";
-let cistellaExercicis = [];
+import{guardarSessio,carregarSessio,eliminarSessio} from "./persistencia.js";
+
+let cistellaExercicis = carregarSessio().filter((id) =>
+    exercicis.some((e) => e.id === id)
+);
 
 export function afegirExercici(id){
     // `.some()` és més eficient que `.find()` en aquest cas: amb `.some()` sols comprovem si l'ID existeix (true/false),
@@ -10,7 +14,7 @@ export function afegirExercici(id){
     if (cistellaExercicis.includes(id)) return "Aquest exercici ja està seleccionat"
 
     cistellaExercicis.push(id);
-
+    guardarSessio(cistellaExercicis);
     return "Exercici afegit.";
 }
 //Retorna els detalls complets dels exercicis que formen part de la rutina seleccionada, buscant-los pel seu ID.
@@ -20,7 +24,10 @@ export const obtenirSessio = () =>
 
 export function eliminarExercici(id){
     const ex = cistellaExercicis.indexOf(id);
-    if ( ex !== -1) cistellaExercicis.splice(ex, 1);
+    if ( ex !== -1) {
+        cistellaExercicis.splice(ex, 1);
+        guardarSessio(cistellaExercicis);
+    }
     return "Exercici eliminat";
 }
 export function moureExercici(id, desp) {
@@ -31,6 +38,7 @@ export function moureExercici(id, desp) {
 
     cistellaExercicis.splice(i, 1);
     cistellaExercicis.splice(j, 0, id);
+    guardarSessio(cistellaExercicis);
 }
 export function reordenarExercici(idOrigen, idDesti) {
     const indexOrigen = cistellaExercicis.indexOf(idOrigen);
@@ -40,4 +48,9 @@ export function reordenarExercici(idOrigen, idDesti) {
 
     const [mogut] = cistellaExercicis.splice(indexOrigen, 1);
     cistellaExercicis.splice(indexDesti, 0, mogut);
+    guardarSessio(cistellaExercicis);
+}
+export function buidarSessio() {
+    cistellaExercicis = [];
+    eliminarSessio();
 }

@@ -1,6 +1,6 @@
 import {exercicis} from "./dades.js";
 import {pintarCataleg,pintarSessio,pintarErrorsForm,pintarErrorsSessio,pintarResum,pintarTotalsSessio,pintarDetallExercici} from "./vista.js";
-import {afegirExercici, eliminarExercici, obtenirSessio,moureExercici,reordenarExercici} from "./rutina.js";
+import {afegirExercici, eliminarExercici, obtenirSessio,moureExercici,reordenarExercici,buidarSessio} from "./rutina.js";
 import {validarFormulari} from "./formulari.js";
 import {resumSessio, validarSessio} from "./regles.js";
 import {filtrarIOrdenarCataleg} from "./filtres.js";
@@ -115,10 +115,20 @@ contenidorCistella.addEventListener("dragend", (event) => {
     const li = event.target.closest("li");
     if (li) li.classList.remove("arrossegant");
 });
-
+const btBuidar = document.querySelector("#bt-buidar-sessio");
+if (btBuidar) {
+    btBuidar.addEventListener("click", () => {
+        buidarSessio();
+        actualitzarSessio();
+    });
+}
 
     function actualitzarSessio() {
         const sessioActual = obtenirSessio();
+        const btBuidar = document.querySelector("#bt-buidar-sessio");
+        if (btBuidar) {
+            btBuidar.disabled = sessioActual.length === 0;
+        }
         pintarSessio(sessioActual, document.querySelector("#llista-exercicis"));
         pintarTotalsSessio(resumSessio(sessioActual));
         revisar();
