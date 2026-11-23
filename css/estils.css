@@ -54,3 +54,7 @@ body.tema-fosc {
     background-color: #1a1a1a;
     color: #f4f4f4;
 }
+aside.tema-fosc {
+    color: white;
+    background-color: #1a1a1a;
+}
